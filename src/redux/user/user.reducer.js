@@ -1,4 +1,3 @@
-const { getDefaultNormalizer } = require("@testing-library/react")
 
  const INITIAL_STATE = {
      currentUser: null
