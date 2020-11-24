@@ -25,11 +25,6 @@ const SignIn = ({emailSignInStart,googleSignInStart}) => {
     const { value, name } = event.target;
     setCredentials({ ...userCredentials, [name]: value });
   };
-  const handleEnterPress = event => {
-    if(event.keyCode === 13){
-      handleSubmit();
-    }
-  }
     return (
       <SignInContainer>
         <SignInTitle>I already have an account</SignInTitle>
@@ -53,7 +48,7 @@ const SignIn = ({emailSignInStart,googleSignInStart}) => {
             required
           />
           <ButtonsBarContainer>
-            <CustomButton type='submit' handleEnterPress={handleEnterPress}> Sign in </CustomButton>
+            <CustomButton type='submit'> Sign in </CustomButton>
             <CustomButton type='button' onClick={googleSignInStart} isGoogleSignIn>
               Sign in with Google
             </CustomButton>
