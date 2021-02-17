@@ -105,4 +105,8 @@ export const facebookProvider = new firebase.auth.FacebookAuthProvider();
 facebookProvider.setCustomParameters({ prompt: 'select_account' });
 export const signInWithFacebook = () => auth.signInWithPopup(facebookProvider);
 
+export const githubProvider = new firebase.auth.GithubAuthProvider();
+githubProvider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGithub = () => auth.signInWithPopup(githubProvider);
+
 export default firebase;

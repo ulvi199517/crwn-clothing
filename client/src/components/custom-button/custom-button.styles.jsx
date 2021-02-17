@@ -44,12 +44,26 @@ const facebookSignInStyles = css`
     color: #013ea0;
   }
 `;
+const githubSignInStyles = css`
+    background-color: white;
+    color: #12151a;
+    border: 1px solid #12151a;
+
+    &:hover {
+      background-color: #12151a;
+      border: 1px solid  white;
+      color:  white;
+    }
+`;
+
 
 const getButtonStyles = props => {
   if (props.isGoogleSignIn) {
     return googleSignInStyles;
   } else if(props.isFacebookSignIn){
     return facebookSignInStyles;
+  } else if(props.isGithubSignIn){
+    return githubSignInStyles;
   }
 
   return props.inverted ? invertedButtonStyles : buttonStyles;
@@ -86,11 +100,11 @@ export const CustomButtonContainer = styled.button`
         }
     }
 
-  &:hover {
+  /* &:hover {
     background-color: white;
     color: black;
     border: 1px solid black;
-  }
+  } */
 
   @media screen and (max-width: 800px){
     &:disabled{

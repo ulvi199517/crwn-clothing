@@ -4,7 +4,8 @@ import UserActionTypes from './user.types';
 import {
     auth, 
     googleProvider,
-    facebookProvider, 
+    facebookProvider,
+    githubProvider, 
     createUserProfileDocument,
     getCurrentUser
 } from '../../firebase/firebase.utils';
@@ -64,6 +65,14 @@ export function* signInWithFacebook() {
         yield put(signInFailure(error));
     }
 }
+export function* signInWithGithub() {
+    try {
+        const {user} = yield auth.signInWithPopup(githubProvider);
+        yield getSnapshotFromUserAuth(user);
+    } catch(error){
+        yield put(signInFailure(error));
+    }
+}
 export function* signInWithEmail({payload: {email, password}}){
     try {
         const {user} = yield auth.signInWithEmailAndPassword(email, password);
@@ -89,6 +98,9 @@ export function* onGoogleSignInStart() {
 export function* onFacebookSignInStart() {
     yield takeLatest(UserActionTypes.FACEBOOK_SIGN_IN_START, signInWithFacebook);
 }
+export function* onGithubSignInStart() {
+    yield takeLatest(UserActionTypes.GITHUB_SIGN_IN_START, signInWithGithub);
+}
 export function* onEmailSignInStart() {
     yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInWithEmail);
 }
@@ -109,6 +121,7 @@ export function* userSagas() {
     yield all([
         call(onGoogleSignInStart),
         call(onFacebookSignInStart),
+        call(onGithubSignInStart),
         call(onEmailSignInStart),
         call(onCheckUserSession),
         call(onSignOutStart),
