@@ -34,10 +34,22 @@ const googleSignInStyles = css`
     border: 1px solid #4285f4;
   }
 `;
+const facebookSignInStyles = css`
+    background-color: #013ea0;
+    color: white;
+
+  &:hover {
+    background-color: white;
+    border: 1px solid #013ea0;
+    color: #013ea0;
+  }
+`;
 
 const getButtonStyles = props => {
   if (props.isGoogleSignIn) {
     return googleSignInStyles;
+  } else if(props.isFacebookSignIn){
+    return facebookSignInStyles;
   }
 
   return props.inverted ? invertedButtonStyles : buttonStyles;
@@ -45,17 +57,48 @@ const getButtonStyles = props => {
 
 export const CustomButtonContainer = styled.button`
   min-width: 165px;
-  width: auto;
+  width: 100%;
   height: 50px;
   letter-spacing: 0.5px;
   line-height: 50px;
-  padding: 0 35px 0 35px;
+  padding: 0 35px;
   font-size: 15px;
+  background-color: black;
+  color: white;
   text-transform: uppercase;
   font-family: 'Open Sans Condensed';
   font-weight: bolder;
+  border: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
   ${getButtonStyles}
+
+  &:disabled{
+      cursor: not-allowed;
+      pointer-events: all;
+        &:hover {
+        background-color: #a1a1a1;
+        color: white;
+        border: 1px solid white;
+        }
+    }
+
+  &:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+
+  @media screen and (max-width: 800px){
+    &:disabled{
+      cursor: not-allowed;
+      pointer-events: all;
+      background-color: #a1a1a1;
+      color: white;
+      border: 1px solid white;
+    }
+  }
 `;
